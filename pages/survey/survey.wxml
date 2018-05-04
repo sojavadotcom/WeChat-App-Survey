@@ -1,0 +1,37 @@
+<view class="wrapper">
+  <text class="title">{{surveyData.title}}</text>
+  <text class="sub-title">{{surveyData.subTitle}}</text>
+  <view class="container">
+    <form bindsubmit="setQuestion">
+      <block wx:for="{{currentQuestion}}" wx:key="item.id" wx:for-item="item">
+        <view class="section section_gap">
+          <view class="section__title">{{item.title}}</view>
+          <view class="section__sub-title">{{item.subTitle}}</view>
+          <block wx:if="{{!item.multiSelect}}">
+            <radio-group name="choice_{{item.id}}" bindchange="optChange" data-id="{{item.id}}">
+              <view class="choice" wx:for="{{item.options}}" wx:key="label" wx:for-item="opt">
+                <label><radio value="{{opt.label}}" checked="{{opt.checked}}" data-input-showing="{{opt.inputShowing}}"/>{{opt.label}}</label>
+              </view>
+            </radio-group>
+          </block>
+          <block wx:else>
+            <checkbox-group name="choice_{{item.id}}" bindchange="optChange" data-id="{{item.id}}">
+              <view class="choice" wx:for="{{item.options}}" wx:key="label" wx:for-item="opt">
+                <label><checkbox value="{{opt.label}}" checked="{{opt.checked}}" data-input-showing="{{opt.inputShowing}}"/>{{opt.label}}</label>
+              </view>
+            </checkbox-group>
+          </block>
+          <block wx:if="{{item.inputShowing}}">
+            <input name="input_{{item.id}}" placeholder="{{item.placeholder}}" value="{{item.memo}}" />
+          </block>
+        </view>
+      </block>
+      <view class="btn-area">
+        <button formType="submit" data-act="next" disabled="{{btn.disable.start}}" style="display: {{btn.showing.start}}">开　始</button>
+        <button formType="submit" data-act="previous" disabled="{{btn.disable.previous}}" style="display: {{btn.showing.previous}}">上一条</button>
+        <button formType="submit" data-act="next" disabled="{{btn.disable.next}}" style="display: {{btn.showing.next}}">下一条</button>
+        <button formType="submit" data-act="submit" disabled="{{btn.disable.submit}}" style="display: {{btn.showing.submit}}">回答完毕</button>
+      </view>
+    </form>
+  </view>
+</view>

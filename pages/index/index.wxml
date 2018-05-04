@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="wrapper">
+  <text class="hospital-logo"></text>
+  <view class="container">
+    <view wx:for="{{surveyItems}}" wx:key="item.id" class="items">
+      <button open-type="getPhoneNumber" bindgetphonenumber="toSurvey" data-item-id="{{item.id}}">{{item.title}}</button>
+    </view>
+  </view>
+</view>
+<view class="footer">{{motto}}</view>

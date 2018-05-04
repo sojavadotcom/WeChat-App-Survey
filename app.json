@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/survey/survey"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f0f0f0",
+    "navigationBarTitleText": "鸡西市中医医院在线调查",
+    "navigationBarTextStyle": "black"
+  }
+}
