@@ -3,7 +3,7 @@
   <text class="sub-title">{{surveyData.subTitle}}</text>
   <view class="container">
     <form bindsubmit="setQuestion">
-      <block wx:for="{{currentQuestion}}" wx:key="item.id" wx:for-item="item">
+      <block wx:for="{{currentQuestion}}" wx:key="id" wx:for-item="item" wx:for-index="id">
         <view class="section section_gap">
           <view class="section__title">{{item.title}}</view>
           <view class="section__sub-title">{{item.subTitle}}</view>

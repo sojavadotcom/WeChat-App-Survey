@@ -154,22 +154,25 @@ Page({
     data.id = surveyData.id;
     data.openid = app.globalData.openid || "";
     data.sessionKey = app.globalData.sessionKey || "";
+    data.unionId = app.globalData.unionId || "";
     data.encryptedData = app.globalData.phoneNumber.encryptedData;
     data.iv = app.globalData.phoneNumber.iv;
     data.beginTime = surveyData.beginTime;
-    data.userInfo = typeof app.globalData.userInfo != undefined && app.globalData.userInfo != null ? JSON.stringify(app.globalData.userInfo) : "";
+    data.userInfo = typeof app.globalData.userInfo != undefined && app.globalData.userInfo != null ? JSON.stringify(app.globalData.userInfo) : "{}";
 
     wx.request({
       url: app.globalData.host + '/WeChat/Survey/Answer.s2',
       data: { data: JSON.stringify(data) },
       method: 'GET',
       complete: res => {
-        res.data = res.data || { success: res.statusCode == 200, message: "" };
+        console.log(res)
+        var statusCode = res.statusCode || 0;
+        res.data = res.data || { success: statusCode == 200, message: "" };
         wx.hideLoading();
-        if (res.statusCode != 200 || ((res.data&&!res.data.success) || false)) {
+        if (statusCode != 200 || ((res.data&&!res.data.success) || false)) {
           wx.showModal({
             title: '发生错误',
-            content: '发生错误 [' + (res.data.message || (res.statusCode != 200 ? "statusCode:" + res.statusCode : res.errMsg)) + ']',
+            content: '发生错误 [' + (res.data.message || (statusCode != 200 && statusCode != 0 ? "statusCode:" + statusCode : res.errMsg)) + ']',
             showCancel: false,
             confirmText: '重试',
             complete: res => {

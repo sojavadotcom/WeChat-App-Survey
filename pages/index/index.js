@@ -50,7 +50,7 @@ Page({
       });
     }
     wx.request({
-      url: 'https://jxszyyy.org.cn/wx/WeChat/Survey/List.s2',
+      url: app.globalData.host + '/WeChat/Survey/List.s2',
       header: { 'content-type': 'application/json' },
       success: res => {
         this.setData({
